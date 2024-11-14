@@ -13,9 +13,13 @@ function useFlip() {
 function useAxios(baseUrl) {
   const [data, setData] = useState([]);
 
-  const addData = async () => {
-    const response = await axios.get(`${baseUrl}`);
-    setData((prevData) => [...prevData, { ...response.data, id: uuid() }]);
+  const addData = async (endpoint = "") => {
+    try {
+      const response = await axios.get(`${baseUrl}${endpoint}`);
+      setData((prevData) => [...prevData, { ...response.data, id: uuid() }]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return [data, addData];
