@@ -22,7 +22,11 @@ function useAxios(baseUrl) {
     }
   };
 
-  return [data, addData];
+  const clearData = () => {
+    setData([]);
+  };
+
+  return [data, addData, clearData];
 }
 
 export { useFlip, useAxios };
